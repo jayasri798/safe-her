@@ -1,0 +1,92 @@
+.contacts-screen {
+  padding: 16px;
+}
+
+.screen-header {
+  margin-bottom: 24px;
+  padding: 8px 0;
+}
+
+.error-text {
+  color: var(--danger);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-main);
+}
+
+.contact-row-card {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.contact-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  margin-right: 12px;
+}
+
+.contact-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-info strong {
+  font-size: 15px;
+  color: var(--text-main);
+}
+
+.contact-info span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.contact-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.call-btn-circle, .delete-btn-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.call-btn-circle {
+  background-color: rgba(108, 62, 232, 0.1);
+  color: var(--primary);
+}
+
+.delete-btn-circle {
+  background-color: var(--danger-light);
+  color: var(--danger);
+}
+
+.empty-msg {
+  text-align: center;
+  color: var(--text-muted);
+  margin-top: 40px;
+  font-size: 14px;
+}

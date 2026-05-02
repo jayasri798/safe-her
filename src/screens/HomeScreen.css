@@ -1,0 +1,285 @@
+.home-screen {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.greeting-card {
+  height: 100px;
+  background: var(--primary-gradient);
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.greeting-card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  color: white;
+}
+
+.greeting-card p {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-top: 4px;
+}
+
+.sos-section {
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.sos-rings-container {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sos-button {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: var(--danger);
+  border: none;
+  color: white;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(232, 32, 32, 0.4);
+  transition: transform 0.1s;
+}
+
+.sos-button.holding {
+  transform: scale(0.95);
+}
+
+.pulse-ring {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: var(--danger);
+  z-index: 1;
+}
+
+.ring-1 { animation: pulseRing 2s infinite; opacity: 0.4; }
+.ring-2 { animation: pulseRing 2s infinite 0.3s; opacity: 0.25; }
+.ring-3 { animation: pulseRing 2s infinite 0.6s; opacity: 0.1; }
+
+.sos-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 24px;
+}
+
+.quick-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+.info-mini-card {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  margin: 0;
+}
+
+.info-mini-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-mini-text strong {
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.info-mini-text span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* SOS Popup */
+.sos-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(232, 32, 32, 0.95);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.sos-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+  color: white;
+  text-align: center;
+}
+
+.warning-icon-animate {
+  color: white;
+  margin-bottom: 20px;
+  animation: shake 0.5s infinite;
+}
+
+.popup-title {
+  font-size: 32px;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.popup-subtitle {
+  font-size: 18px;
+  opacity: 0.9;
+  margin-bottom: 40px;
+}
+
+.countdown-circle {
+  width: 120px;
+  height: 120px;
+  border: 4px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+
+.notified-section {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.notified-section p {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.pills-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.contact-pill {
+  background-color: white;
+  color: var(--danger);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.btn-cancel-popup {
+  background-color: white;
+  color: var(--danger);
+  border: none;
+  height: 48px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 800;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* PIN Popup */
+.pin-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+  backdrop-filter: blur(5px);
+}
+
+.pin-popup-box {
+  background-color: var(--bg-card);
+  padding: 30px;
+  border-radius: 24px;
+  width: 85%;
+  color: var(--text-main);
+  text-align: center;
+}
+
+.pin-popup-box h3 {
+  margin: 16px 0;
+}
+
+.pin-popup-box input {
+  width: 100%;
+  height: 60px;
+  background-color: var(--input-bg);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 12px;
+  margin-bottom: 20px;
+  color: var(--text-main);
+}
+
+.pin-error-text {
+  color: var(--danger);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.pin-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.pin-actions button {
+  flex: 1;
+  height: 48px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pin-actions button.confirm {
+  background-color: var(--primary);
+  color: white;
+}
+
+.pin-popup-box svg {
+  color: var(--primary);
+}

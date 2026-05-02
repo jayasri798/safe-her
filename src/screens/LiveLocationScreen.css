@@ -1,0 +1,92 @@
+.location-screen {
+  padding: 16px;
+}
+
+.screen-header {
+  margin-bottom: 24px;
+  padding: 8px 0;
+}
+
+.map-wrapper {
+  height: 260px;
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.location-info-card {
+  padding: 16px;
+}
+
+.address-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+}
+
+.address-text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-main);
+}
+
+.coords-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+
+.coord-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.coord-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.coord-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  font-family: monospace;
+}
+
+.updated-text {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.location-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

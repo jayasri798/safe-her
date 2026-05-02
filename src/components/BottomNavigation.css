@@ -1,0 +1,74 @@
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: var(--nav-bg);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid var(--nav-border);
+  z-index: 1000;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #888;
+  flex: 1;
+  height: 100%;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 2px;
+}
+
+.nav-label {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.nav-tab.active {
+  color: var(--primary);
+}
+
+.nav-tab.active .nav-label {
+  font-weight: 700;
+}
+
+.active-dot {
+  position: absolute;
+  top: 6px;
+  width: 4px;
+  height: 4px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-tab.active .active-dot {
+  opacity: 1;
+}
+
+[data-theme='dark'] .bottom-nav {
+  background-color: #1A1A2E;
+  border-top: 1px solid #2A2A3E;
+}
+
+[data-theme='dark'] .nav-tab {
+  color: #777;
+}
+
+[data-theme='dark'] .nav-tab.active {
+  color: var(--primary);
+}
