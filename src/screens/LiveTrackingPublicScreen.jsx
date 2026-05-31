@@ -58,20 +58,26 @@ const LiveTrackingPublicScreen = () => {
     };
   }, []);
 
-  // Listen to User Profile Data (name, gender)
+  // Listen to User Profile Data (name, gender, and fallback location)
   useEffect(() => {
     if (!userId) return;
 
     const userRef = doc(db, "users", userId);
     const unsubscribe = onSnapshot(userRef, (snapshot) => {
       if (snapshot.exists()) {
-        const data = snapshot.snapshot ? snapshot.snapshot.data() : snapshot.data();
+        const data = snapshot.data();
         setUserData(data);
+        setIsSOSActive(!!data.isSOSActive);
         
-        // Check for active SOS alert from last 1 hour
-        if (data.sos_alerts) {
-          // If Firestore includes SOS flag in user root
-          setIsSOSActive(!!data.isSOSActive);
+        // Fallback: If no location subcollection coordinates yet, parse from root profile map
+        if (data.location && data.location.lat && data.location.lng) {
+          const newLoc = {
+            lat: parseFloat(data.location.lat),
+            lng: parseFloat(data.location.lng),
+            updatedAt: data.location.updatedAt ? new Date(data.location.updatedAt) : new Date()
+          };
+          setTrackedLocation(prev => prev ? prev : newLoc);
+          setLoading(false);
         }
       } else {
         setError('User profile not found. The link may have expired.');
@@ -84,11 +90,10 @@ const LiveTrackingPublicScreen = () => {
     return () => unsubscribe();
   }, [userId]);
 
-  // Listen to Tracked Location updates
+  // Listen to Tracked Location updates from location/current subcollection
   useEffect(() => {
     if (!userId) return;
 
-    // Listen to users/{userId}/location/current
     const currentLocRef = doc(db, "users", userId, "location", "current");
     const unsubscribe = onSnapshot(currentLocRef, (snapshot) => {
       if (snapshot.exists()) {
@@ -104,11 +109,10 @@ const LiveTrackingPublicScreen = () => {
           if (lastLocationRef.current) {
             const prev = lastLocationRef.current;
             const dist = calculateDistance(prev.lat, prev.lng, newLoc.lat, newLoc.lng);
-            const timeDiff = (newLoc.updatedAt.getTime() - prev.updatedAt.getTime()) / 1000; // secs
+            const timeDiff = (newLoc.updatedAt.getTime() - prev.updatedAt.getTime()) / 1000;
             
             if (timeDiff > 0) {
-              const speed = dist / timeDiff; // m/s
-              // Threshold 0.8 m/s (~2.9 km/h) to classify as moving
+              const speed = dist / timeDiff;
               if (speed > 0.8) {
                 setSpeedState('Moving 🚶');
               } else {
@@ -123,7 +127,6 @@ const LiveTrackingPublicScreen = () => {
 
           // Append to trail
           setTrail(prev => {
-            // Avoid inserting identical successive points
             if (prev.length > 0) {
               const lastPoint = prev[prev.length - 1];
               if (lastPoint[0] === newLoc.lat && lastPoint[1] === newLoc.lng) {
@@ -133,32 +136,10 @@ const LiveTrackingPublicScreen = () => {
             return [...prev, [newLoc.lat, newLoc.lng]];
           });
         }
-      } else {
-        // Fallback: Check if location is embedded directly inside users/{userId}
-        const userRef = doc(db, "users", userId);
-        getDocFallback(userRef);
       }
     }, (err) => {
       console.error("Firestore location current sub:", err);
     });
-
-    const getDocFallback = async (ref) => {
-      const unsubFallback = onSnapshot(ref, (snapshot) => {
-        if (snapshot.exists()) {
-          const data = snapshot.data();
-          if (data.location && data.location.lat && data.location.lng) {
-            const newLoc = {
-              lat: parseFloat(data.location.lat),
-              lng: parseFloat(data.location.lng),
-              updatedAt: data.location.updatedAt ? new Date(data.location.updatedAt) : new Date()
-            };
-            setTrackedLocation(newLoc);
-            setLoading(false);
-          }
-        }
-      });
-      return () => unsubFallback();
-    };
 
     return () => unsubscribe();
   }, [userId]);
