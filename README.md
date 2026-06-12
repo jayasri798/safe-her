@@ -325,4 +325,4 @@ Suraksha is not just a project—it is a functional, real-world utility engineer
 ---
 
 ### *Suraksha — Engineered with 💜 to protect every woman in India*
-**CSE Department | Diploma Third Year | Academic Session 2025-26**
+**CSE Department | Diploma Third Year | Academic Session 2026-27**
